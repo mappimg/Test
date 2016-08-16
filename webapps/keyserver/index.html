@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <meta charset="shift_jis"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Door Manager</title>
+	<script src="angular.min.js"></script>
+	<script src="script.js"></script>
+	<script src="angular-route.min.js"></script>
+	<script src="angular-animate.min.js"></script>
+	<link rel="stylesheet" href="pure-min.css"/>
+	<link rel="stylesheet" href="manager.css"/>
+	
+	<body ng-app="door_manager">
+		<div ng-controller="MyViewController">
+		<div class="standard-block">
+		<div class="standard-block-main"><div class="flip" ng-class="{forward: flipforward, backward: !flipforward}" ng-view></div></div>
+		</div>
+		</div>
+	</body>
+</html>
+

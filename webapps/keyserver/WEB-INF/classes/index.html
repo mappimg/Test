@@ -1,0 +1,42 @@
+<CTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="UTF-8" />
+<title>AngularJS TIPS</title>
+</head>
+<script type="text/javascript" src="script.js"></script>
+<body ng-controller="MyController">
+<form name="myForm" novalidate>
+  <label for="name">名前：</label>
+  <input id="name" name="name" type="text" ng-model="name" />
+  <button ng-click="onclick()">送信</button>
+</form>
+<div>{{result}}</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<script>
+angular.module('myApp', [])
+  .controller('MyController', ['$scope', '$http', function($scope, $http) {
+    $scope.onclick = function() {
+      // 1サーバーに対してHTTP POSTでリクエストを送信
+      var keys = ["param"];
+      var values = [$scope.name];
+      var myurl = MakeURLWithParams('http://192.168.100.111:8080/keyserver/testjson',keys, values);
+      $scope.result = myurl;
+      $http({
+        method: 'POST',
+        url: myurl,
+      })
+      // 成功時の処理（ページにあいさつメッセージを反映）
+      .success(function(data, status, headers, config){
+        $scope.result = data;
+      })
+      // 失敗時の処理（ページにエラーメッセージを反映）
+      .error(function(data, status, headers, config){
+        $scope.result = '通信失敗！';
+      });
+    };
+  }]);
+</script>
+</body>
+</html>
+
